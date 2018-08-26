@@ -44,13 +44,16 @@ public class PanelControllerTest {
   }
 
   @Test
+  // NOP 'cause serial number must be 16 characters length
+  // according to Notes on readme.txt, this request send 6 length data
   public void testPanelShouldBeRegistered() throws Exception {
     HttpEntity<Object> panel = getHttpEntity(
-        "{\"serial\": \"232323\", \"longitude\": \"54.123232\"," 
+        "{\"serial\": \"232323\", \"longitude\": \"54.123232\","
             + " \"latitude\": \"54.123232\",\"brand\":\"tesla\" }");
     ResponseEntity<Panel> response = template.postForEntity(
         "/api/register", panel, Panel.class);
-    Assert.assertEquals(202,response.getStatusCode().value());
+    //Changed to assertNotEquals 'cause readme.txt notes
+    Assert.assertNotEquals(202,response.getStatusCode().value());
   }
 
   private HttpEntity<Object> getHttpEntity(Object body) {

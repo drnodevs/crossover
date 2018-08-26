@@ -1,13 +1,11 @@
 package com.crossover.techtrial.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.lang.Nullable;
 
 /**
@@ -28,12 +26,15 @@ public class Panel implements Serializable {
 
   @NotNull
   @Column(name = "serial")
+  @Size(min = 16,max = 16,message = "serial number must be 16 characters length")
   String serial;
 
   @Column(name = "longitude")
+  @Digits(integer = 5, fraction = 6)
   Double longitude;
 
   @Column(name = "latitude")
+  @Digits(integer = 5, fraction = 6)
   Double latitude;
 
   @Nullable
